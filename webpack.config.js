@@ -15,8 +15,8 @@ module.exports = {
 
     devServer: {
         proxy: {
-            '/api/': 'http://localhost:3000'
-            // '/build': 'http://localhost:3000'
+            '/api/': 'http://localhost:3000',
+            '/build': 'http://localhost:3000'
         },
         compress: true,
         port: 8080,
@@ -45,7 +45,18 @@ module.exports = {
             {
                 test: [/\.s[ac]ss$/i, /\.css$/i],
                 exclude: /node_modules/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
+                use: ['style-loader', 'css-loader', 'sass-loader', 
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                postcssOptions: {
+                                    plugins: [
+                                        ['postcss-preset-env']
+                                    ]
+                                }
+                            }
+                        }
+                    ]
             }
         ]
     },
