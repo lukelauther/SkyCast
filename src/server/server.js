@@ -13,16 +13,17 @@ app.get('/', (req, res) => {
     return res.status(200).sendFile(path.resolve(__dirname, './index.html'));
 })
 
-app.post('/api/', weatherController.getLocationInfo, (req, res) => {
+app.post('/api/', weatherController.getLocationKey, weatherController.getCurrentConditions, (req, res) => {
     // console.log('req.body', req.body)
-    console.log('res.locals', res.locals.locationInfo)
+    // console.log('res.locals', res.locals.locationInfo)
     return res.status(200).json({
         description: res.locals.description,
         temp: res.locals.temp,
         feelsLike: res.locals.feelsLike,
         high: res.locals.high,
         low: res.locals.low,
-        windSpeed: res.locals.windSpeed
+        windSpeed: res.locals.windSpeed,
+        icon: res.locals.icon,
     })
 })
 

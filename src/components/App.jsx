@@ -12,7 +12,7 @@ export default function App() {
     }
 
     const handleChange = (e) => {
-        setLocation(e.target.value)
+        setLocation(e.target.value + ', us')
     }
 
     const submitLocation = (e) => {
@@ -33,9 +33,10 @@ export default function App() {
                 feelsLike: data.feelsLike,
                 high: data.high,
                 low: data.low,
-                windSpeed: data.windSpeed
+                windSpeed: data.windSpeed,
+                icon: data.icon,
             })
-            console.log('data from api call: ', locationInfo)
+            // console.log('data from api call: ', locationInfo)
         })
         .catch(error => console.log('error when receiving api data, ' + error))
     }
