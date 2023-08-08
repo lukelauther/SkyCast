@@ -14,12 +14,10 @@ weatherController.getLocationKey = (req, res, next) => {
 }
 
 weatherController.getCurrentConditions = (req, res, next) => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${res.locals.lat}&lon=${res.locals.lon}&appid=${apiKey}&units=imperial`
-    )
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${res.locals.lat}&lon=${res.locals.lon}&appid=${apiKey}&units=imperial`)
       .then((info) => info.json())
       .then((data) => {
-        console.log('data', data)
+        // console.log('data', data)
         res.locals.description = data.weather[0].description;
         res.locals.temp = data.main.temp;
         res.locals.feelsLike = data.main.feels_like;
@@ -30,6 +28,24 @@ weatherController.getCurrentConditions = (req, res, next) => {
         return next();
       })
       .catch((error) => console.log("Error in getCurrentConditions", error));
+}
+
+weatherController.getForecast = (req, res, next) => {
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${res.locals.lat}&lon=${res.locals.lon}&appid=${apiKey}&units=imperial`)
+      .then((info) => info.json())
+      .then((data) => {
+        const days = [];
+        for (let i = 0; i < data.list.length; i++) {
+          if (data.list[i].dt_txt.includes('12:00:00')) {
+            days.push([data.list[i].dt_txt, data.list[i].main.temp_max, data.list[i].main.temp_min, data.list[i].weather[0].description])
+            // console.log(data.list[i].main)
+          }
+        }
+        console.log('days', days)
+        res.locals.forecast = days
+        return next();
+      })
+      .catch((error) => console.log("Error in getForecast", error));
 }
 
 module.exports = weatherController
