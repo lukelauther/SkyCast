@@ -35,8 +35,9 @@ export default function App() {
                 low: data.low,
                 windSpeed: data.windSpeed,
                 icon: data.icon,
+                forecast: data.forecast,
             })
-            // console.log('data from api call: ', locationInfo)
+            // console.log('data from api call: ', data)
         })
         .catch(error => console.log('error when receiving api data, ' + error))
     }

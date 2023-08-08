@@ -37,11 +37,15 @@ weatherController.getForecast = (req, res, next) => {
         const days = [];
         for (let i = 0; i < data.list.length; i++) {
           if (data.list[i].dt_txt.includes('12:00:00')) {
-            days.push([data.list[i].dt_txt, data.list[i].main.temp_max, data.list[i].main.temp_min, data.list[i].weather[0].description])
-            // console.log(data.list[i].main)
+            days.push({
+              date: data.list[i].dt_txt, 
+              max: data.list[i].main.temp_max, 
+              min: data.list[i].main.temp_min, 
+              description: data.list[i].weather[0].description
+            })
           }
         }
-        console.log('days', days)
+        // console.log('days', days)
         res.locals.forecast = days
         return next();
       })
