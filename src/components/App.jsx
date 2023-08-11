@@ -12,7 +12,7 @@ export default function App() {
     }
 
     const handleChange = (e) => {
-        setLocation(e.target.value + ', us')
+        setLocation(e.target.value)
     }
 
     const submitLocation = (e) => {
