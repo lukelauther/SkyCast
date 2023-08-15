@@ -20,7 +20,7 @@ export default function App() {
         // console.log(`Location submitted: ${location}`)
         fetch('/api/', {
             method: 'POST',  
-            body: JSON.stringify({ userLocation: location }),
+            body: JSON.stringify({ userLocation: `${location}, US` }),
             headers: {
                 'Content-type': 'application/json',
             },

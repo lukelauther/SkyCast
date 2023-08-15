@@ -34,11 +34,32 @@ weatherController.getForecast = (req, res, next) => {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${res.locals.lat}&lon=${res.locals.lon}&appid=${apiKey}&units=imperial`)
       .then((info) => info.json())
       .then((data) => {
+        const months = {
+          '01': 'January',
+          '02': 'February',
+          '03': 'March',
+          '04': 'April',
+          '05': 'May',
+          '06': 'June',
+          '07': 'July',
+          '08': 'August',
+          '09': 'September',
+          '10': 'October',
+          '11': 'November',
+          '12': 'December',
+        }
         const days = [];
         for (let i = 0; i < data.list.length; i++) {
           if (data.list[i].dt_txt.includes('12:00:00')) {
+            const numDate = data.list[i].dt_txt.split(' ')[0].toString().split('-')
+            let letterDate = ''
+            for (const key in months) {
+              if (key === numDate[1]) {
+                letterDate = `${months[key]} ${numDate[2]}`
+              }
+            }
             days.push({
-              date: data.list[i].dt_txt, 
+              date: letterDate, 
               max: data.list[i].main.temp_max, 
               min: data.list[i].main.temp_min, 
               description: data.list[i].weather[0].description
