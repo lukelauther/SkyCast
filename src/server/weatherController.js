@@ -17,7 +17,6 @@ weatherController.getCurrentConditions = (req, res, next) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${res.locals.lat}&lon=${res.locals.lon}&appid=${apiKey}&units=imperial`)
       .then((info) => info.json())
       .then((data) => {
-        // console.log('data', data)
         res.locals.description = data.weather[0].description;
         res.locals.temp = data.main.temp;
         res.locals.feelsLike = data.main.feels_like;
@@ -66,7 +65,6 @@ weatherController.getForecast = (req, res, next) => {
             })
           }
         }
-        // console.log('days', days)
         res.locals.forecast = days
         return next();
       })

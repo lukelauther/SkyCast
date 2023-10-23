@@ -15,8 +15,6 @@ app.get('/', (req, res) => {
 })
 
 app.post('/api/', weatherController.getLocationKey, weatherController.getCurrentConditions, weatherController.getForecast, (req, res) => {
-    // console.log('req.body', req.body)
-    // console.log('res.locals', res.locals.forecast)
     return res.status(200).json({
         description: res.locals.description,
         temp: res.locals.temp,

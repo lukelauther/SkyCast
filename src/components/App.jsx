@@ -7,17 +7,17 @@ export default function App() {
 
     const [locationInfo, setLocationInfo] = useState({})
 
-    const test = () => {
-        console.log(locationName)
-    }
-
     const handleChange = (e) => {
         setLocation(e.target.value)
     }
 
+    const [locationName, setLocationName] = useState('')
+
     const submitLocation = (e) => {
+
+        setLocationName(location)
+
         e.preventDefault()
-        // console.log(`Location submitted: ${location}`)
         fetch('/api/', {
             method: 'POST',  
             body: JSON.stringify({ userLocation: `${location}, US` }),
@@ -37,14 +37,13 @@ export default function App() {
                 icon: data.icon,
                 forecast: data.forecast,
             })
-            // console.log('data from api call: ', data)
         })
         .catch(error => console.log('error when receiving api data, ' + error))
     }
 
     return (
         <div>
-            <Dashboard handleChange={handleChange} submitLocation={submitLocation} locationInfo={locationInfo} locationName={location} test={test}/>
+            <Dashboard handleChange={handleChange} submitLocation={submitLocation} locationInfo={locationInfo} locationName={locationName}/>
         </div>
     )
 }
