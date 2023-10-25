@@ -23,7 +23,7 @@ weatherController.getCurrentConditions = (req, res, next) => {
         res.locals.high = data.main.temp_max;
         res.locals.low = data.main.temp_min;
         res.locals.windSpeed = data.wind.speed;
-        res.locals.icon = data.weather[0].icon;
+        res.locals.iconURL = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
         return next();
       })
       .catch((error) => console.log("Error in getCurrentConditions", error));

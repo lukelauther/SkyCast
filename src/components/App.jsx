@@ -34,7 +34,7 @@ export default function App() {
                 high: data.high,
                 low: data.low,
                 windSpeed: data.windSpeed,
-                icon: data.icon,
+                iconURL: data.iconURL,
                 forecast: data.forecast,
             })
         })

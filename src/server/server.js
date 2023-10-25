@@ -22,7 +22,7 @@ app.post('/api/', weatherController.getLocationKey, weatherController.getCurrent
         high: res.locals.high,
         low: res.locals.low,
         windSpeed: res.locals.windSpeed,
-        icon: res.locals.icon,
+        iconURL: res.locals.iconURL,
         forecast: res.locals.forecast
     })
 })

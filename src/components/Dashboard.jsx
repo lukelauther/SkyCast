@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function Dashboard(props) {
+    console.log(props)
 
     const days = []
 
@@ -36,8 +37,8 @@ export default function Dashboard(props) {
                 {/* LEFT SIDE OF DASHBOARD */}
                 <div className='flex flex-col justify-center items-center'>
                     <div className='flex justify-center items-center'>
-                        <div> 
-                        <img src="https://openweathermap.org/img/wn/01d@2x.png" id='weatherLogo' alt="" className='h-40 w-40' />
+                        <div>
+                            <img src={!props.iconURL ? 'https://openweathermap.org/img/wn/01d@2x.png' : props.iconURL} id='weatherLogo' alt="weather icon" className='h-40 w-40'/>
                         </div>
                         <div>
                             <p className='text-3xl font-poppins font-semibold'>{!props.locationInfo.temp ? 0 : Math.round(props.locationInfo.temp)} °F</p>
